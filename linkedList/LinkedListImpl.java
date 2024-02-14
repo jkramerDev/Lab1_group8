@@ -84,8 +84,28 @@ public class LinkedListImpl implements LinkedList {
 
 	@Override
 	public Boolean insertBefore(String newItem, String itemToInsertBefore) {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.head == null) {
+			return false;
+		} else if(this.head.data == itemToInsertBefore) {
+			ListItem next = this.head;
+			this.head = new ListItem(newItem);
+			this.head.next = next;
+			return true;
+		} else if(this.head != null && this.head.next != null) {
+			ListItem point = this.head.next;
+			ListItem last = this.head;
+			while(point.data != itemToInsertBefore && point.next != null) {
+				last = point;
+				point = point.next;
+			}
+			if(point.data == itemToInsertBefore) {
+				last.next = new ListItem(newItem);
+				last.next.next = point;
+			}
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
@@ -111,8 +131,15 @@ public class LinkedListImpl implements LinkedList {
 
 	@Override
 	public void sort() {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < this.itemCount(); i++) {
+			ListItem lowest = this.head;
+			for(int k = 0; k < i; k++) {
+				lowest = lowest.next;
+			}
+			for(int j = 0; j < this.itemCount(); j++) {
+				
+			}
+		}
 	}
 
 	public ListItem getHead() {
