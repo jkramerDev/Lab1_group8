@@ -1,54 +1,54 @@
-package stack; 
+package stack;
+import linkedList.LinkedListImpl;
+import linkedList.ListItem;
 
 public class StackImpl implements Stack {
+	LinkedListImpl list = new LinkedListImpl();
 
 	@Override
 	public void push(String s) {
-	
-		System.out.println("thing i added to stack: " + s);
-	
+		if(this.list.getHead() == null) {
+			this.list.addItem(s);
+		} else {
+			this.list.insertBefore(s, this.list.getHead().data);
+		}
 	}
 
 	@Override
 	public String pop() {
-		// TODO Auto-generated method stub
-		return null;
+		ListItem oldHead = this.list.getHead();
+		this.list.deleteItem(oldHead.data);
+		return oldHead.data;
 	}
 
 	@Override
 	public Boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.list.getHead() == null;
 	}
 
 	@Override
 	public Boolean isFull() {
-		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.list.itemCount();
 	}
 
 	@Override
 	public String peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.list.getHead().data;
 	}
 
 	@Override
 	public void setCapacity(int size) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("This method is useless due to the implementation");		
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-		
+		this.list.listItems();	
 	}
  
 

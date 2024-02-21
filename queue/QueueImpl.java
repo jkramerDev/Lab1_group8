@@ -1,6 +1,9 @@
 package queue;
+import linkedList.LinkedListImpl;
+import linkedList.ListItem;
 
 public class QueueImpl implements Queue {
+	LinkedListImpl list = new LinkedListImpl();
 
 	@Override
 	public boolean isFull() {
@@ -10,32 +13,30 @@ public class QueueImpl implements Queue {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.list.getHead() == null;
 	}
 
 	@Override
 	public void enQueue(String element) {
-		// TODO Auto-generated method stub
+		this.list.addItem(element);
 		
 	}
 
 	@Override
 	public String deQueue() {
-		// TODO Auto-generated method stub
-		return null;
+		ListItem oldHead = this.list.getHead();
+		this.list.deleteItem(oldHead.data);
+		return oldHead.data;
 	}
 
 	@Override
 	public void display() {
-		// TODO Auto-generated method stub
-		
+		this.list.listItems();
 	}
 
 	@Override
 	public String peek() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.list.getHead().data;
 	}
 
 }

@@ -15,6 +15,10 @@ public class LinkedListTester {
 		tester.insertBefore("1.5","2");
 		
 		tester.listItems();
+		
+		tester.sort();
+		
+		tester.listItems();
 	}
 
 }

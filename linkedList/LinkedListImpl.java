@@ -69,6 +69,11 @@ public class LinkedListImpl implements LinkedList {
 	public Boolean deleteItem(String thisItem) {
 		if(head == null)
 			return true;
+		
+		if(head.data == thisItem) {
+			this.head = head.next;
+			return true;
+		}
 
 		ListItem current = head;
 		
@@ -128,18 +133,36 @@ public class LinkedListImpl implements LinkedList {
 			}
 		}
 	}
+	
+	private ListItem getLowest() {
+		if(this.head == null) {
+			throw new IndexOutOfBoundsException();
+		} else {
+			ListItem lowest = this.head;
+			ListItem pointer = this.head;
+			while(pointer.next != null) {
+				if(pointer.data.compareTo(lowest.data) < 0) {
+					lowest = pointer;
+				}
+				pointer = pointer.next;
+			}
+			return lowest;
+		}
+	}
 
 	@Override
 	public void sort() {
-		for(int i = 0; i < this.itemCount(); i++) {
-			ListItem lowest = this.head;
-			for(int k = 0; k < i; k++) {
-				lowest = lowest.next;
-			}
-			for(int j = 0; j < this.itemCount(); j++) {
-				
-			}
+		ListItem newHead = this.getLowest();
+		ListItem pointer = newHead;
+		this.deleteItem(newHead.data);
+		
+		while(this.head != null) {
+			pointer.next = this.getLowest();
+			this.deleteItem(pointer.next.data);
+			pointer = pointer.next;
 		}
+		
+		this.head = newHead;
 	}
 
 	public ListItem getHead() {
